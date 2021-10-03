@@ -1,0 +1,21 @@
+/*Implement a function that takes array of integers as input and returns the largest element.
+sample input
+-3 4 1 2 3
+-1 -2 -3 -3 8
+Sample Output
+4
+8
+Explanation : 
+for test case one, 4 is the largest integer in the array.
+Similarly for test case two, 8 is the largest integer in the array.
+*/
+#include<bits/stdc++.h>
+using namespace std;
+
+int largestElement(vector<int> A) {
+      int largestEle = INT_MIN;
+     for (auto element : A ) {
+         largestEle = max(largestEle, element);
+     }
+     return largestEle;
+}

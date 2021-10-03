@@ -1,0 +1,29 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main(){
+	//demo vector
+	//vector<int>arr ={ 1,2,10,12,15};
+
+	//fill constructor
+	vector<int> arr(10,7); //10 elemnt with value 7
+
+	//pop_back
+	arr.pop_back();
+	//push_back in O(1)
+	arr.push_back(16);
+
+	//print all the elements
+	for(int  i=0; i<arr.size(); i++){
+		cout<<arr[i]<<endl;
+	}
+
+	//size of the vector
+	//cout<<arr.size() <<endl;
+
+	//capacity of the vector
+	//cout<<arr.capacity() <<endl;
+
+	return 0;
+}

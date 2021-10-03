@@ -1,0 +1,49 @@
+//Expected Time Complexity: O(N)
+//Hint: Kadane's Algorithm
+/*
+Implement a function that takes an array as input and returns the maximum subarray sum.Sample Input
+1 -2 3 4 4 -2
+5 0 -1 0 1 2 -1
+Sample Output
+11
+7
+Explanation :for test case one, A[2..4] is [3, 4, 4] and It has max sum 3 + 4 + 4 = 11,
+Similarly for test case two, answer should be 7.
+Note: Minimum size of the subarray should be 1. 
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxSumSubarray(vector<int> A) {
+    
+
+    bool f =true;
+    int rr=INT_MIN;
+    for(auto x : A){
+        if(x >0 ) f = false;
+        if(x > rr) rr = x;
+    }
+    if(f) return rr;
+    
+    int maxSumFromPrevIndexToLeft = 0;
+    
+    int finalAnswer = 0;
+    
+    int temporary  = 0;
+    
+    int arraySize = A.size();
+    for (int i = 0; i < arraySize; i++) {
+        temporary = maxSumFromPrevIndexToLeft + A[i];
+        if (temporary < A[i]) {
+            maxSumFromPrevIndexToLeft = A[i];
+        }
+        else {
+            maxSumFromPrevIndexToLeft = temporary;
+        }
+        finalAnswer = max(finalAnswer, maxSumFromPrevIndexToLeft);
+    }
+    
+    return finalAnswer;
+    
+}

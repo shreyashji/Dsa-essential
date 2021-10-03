@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+void printSubarrays(int a[],int n)
+{
+	for(int i=0;i<n;i++){
+		for(int j=i ; j<n; j++){
+			//this loop give us  particular subarray
+			for(int k=i; k<=j; k++){
+					cout<< a[k]<<",";
+			}
+		cout <<endl;
+		}
+	}
+}
+int main(){
+	//Array Containing 
+	int arr[] = {10,20,30,40,50,60};
+	int n = sizeof(arr)/sizeof(int);
+	printSubarrays(arr,n);
+	return 0;
+}
+//tn=all loops running n times so O(n*n*n) =n^3

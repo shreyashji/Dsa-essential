@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+//TOP DOWN DP
+// WE BUILD big solution straight away
+int fib(int n, int dp[]){
+    if(n==0 or n==1){
+    return
+    }
+    //check if the state is already computed
+    if(dp[n]!=0){
+        return dp[n];
+    }
+    //otherwise compute the state and store it
+    return dp[n]=fib(n-1,dp)+fib(n-2,dp);
+} 
+//bottom up approach ,iterative approach(mostly), O(N) space and time
+int fib3(int n){
+    int dp[n+1]={0};
+    //base case assignment
+    dp[0]=0;
+    dp[1]=1;
+    //bottomup dp
+    for(i=2; i<n; i++){
+        dp[i]=dp[i-2]+dp[i-1];
+    }
+    return dp[n]; //nth state
+}
+
+
+int main() {
+	// 
+	return 0;
+}
+
