@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+//cant solve or larger value of n
 bool canPlace(int board[][20],int n, int x,int y){
     for(int k=0; k<x; k++){
         if(board[k][y]==1){
@@ -51,8 +52,7 @@ bool solveNqueen(int n, int board[][20], int i){
         //wheather the current i,j is safe or not
         if(canPlace(board,n,i,j)){
             board[i][j]=1;
-          ways += bool success= solveNqueen(n,board,i+1);
-          
+          ways += solveNqueen(n,board,i+1);
             //backtrack
              board[i][j]=0;
         }
@@ -65,7 +65,8 @@ int main() {
     int board[20][20]={0};
     int n;
     cin>>n;
-solveNqueen(n,board,0);
+    cout<<"ways" <<solveNqueen(n,board,0);
 	return 0;
 }
 
+  
