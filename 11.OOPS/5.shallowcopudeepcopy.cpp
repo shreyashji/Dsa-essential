@@ -3,10 +3,9 @@
 #include<math.h>
 using namespace std;
 class Product{
-
 private:
 	int id; 
-	char name[100]; 
+	char *name;
     int mrp; 
 	int selling_price; 
 public: 
@@ -18,17 +17,21 @@ public:
 		this->id=id;
 		this->mrp=mrp;
 		this->selling_price=selling_price;
+		name=new char[strlen(n)+1];
 		strcpy(name,n);
 	}
-	/*
+//we need to define our own copy constructor only if an object has pointer
+//to dynamically allocated object i.e. a deep copy of object is needed	
+	//this is shallow copy
 	Product(Product &X){
-		//create the copy
 		id=X.id;
-		//name=X.name; //array
+		name=new char [strlen(X.name)+1];
+        strcpy(name,X.name);
 		mrp=X.mrp;
 		selling_price=X.selling_price;
 	}
-*/
+	
+	//setters
 	void setMrp(int price){
         mrp=price;
     }
@@ -41,7 +44,7 @@ public:
 		}
 	}
 	//getters returns some property of product
-	int getMrp(){
+	int getMrp(){	
        return mrp;
     }
     int getSellingPrice(){
@@ -50,31 +53,43 @@ public:
 	void showDetails(){
 		cout<<"Name : "<<name<<endl;
 		cout<<"Id : "<<id<<endl;
-		cout<<"Selling Price : "<<selling_price<<endl;
 		cout<<"MRP : "<<mrp<<endl;
-		cout<<"===================="<<endl;
+		cout<<"Selling Price : "<<selling_price<<endl;
+		cout<<"================"<<endl;
+	}
+	void setName(char *name){
+		strcpy(this->name,name);
 	}
 };
 
 int main() {
 	//Product camera;
 	Product camera(101,"gopro9",28000,26000);
-	//camera.showDetails();
-	Product webcam(camera);
-	Product handyCam=camera; //call to copy constructor
+	Product old_camera(101,"gopro9",28000,26000);
+	 old_camera.setName("heromotorcam9");
+     old_camera.setSellingPrice(1000);
+	 old_camera.showDetails();
+	 camera.showDetails();
 
-	camera.showDetails();
-	camera.showDetails();
-	handyCam.showDetails();
+	//camera.showDetails();
+
+	//Product webcam(camera);
+
+//	Poduct handyCam=camera;
+	//handyCam.setMrp(1000);
+
+	//camera.showDetails();
+	//webcam.showDetails();
+	//handyCam.showDetails();
 	//camera.mrp=100;
 	//camera.selling_price=200;
-//camera.setMrp(100);
-//	camera.setSellingPrice(190);
+	//camera.setMrp(100);
+	//camera.setSellingPrice(190);
 
-//	cout<<sizeof(camera) <<endl;
+	//<<sizeof(camera) <<endl;
 
-//	cout<<"MRP "<<camera.getMrp() <<endl;
-//	cout<<"SELLING PRICE "<<camera.getSellingPrice() <<endl;
-//	return 0;
+	//cout<<"MRP "<<camera.getMrp() <<endl;
+	//cout<<"SELLING PRICE "<<camera.getSellingPrice() <<endl;
+	//return 0;
 }
 
