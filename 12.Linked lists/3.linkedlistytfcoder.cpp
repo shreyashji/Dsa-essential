@@ -222,19 +222,95 @@ public:
 		}
 		return head;
 	}
+	
+	//intersection without hashing and without taking extra space
+	ll intersection_point(auto head1,auto head2)
+	{
+		auto cur1=head1,cur2=head2;
+		while(cur1!=cur2)
+		{
+			if(cur1==NULL)
+				cur1=head2;
+			else
+				cur1=cur1->next;
+			if(cur2==NULL)
+				cur2=head1;
+			else
+				cur2=cur2->next;
+		}
+		return cur1->data;
+	}
+	//odd even 
+	//1   ->  2->   3  ->  4   -> 5
+	//odd    even
+	//1->3->5
+	//2->4
+	//135246
+	auto odd_even(auto head)
+	{
+		auto o=head,e=head->next,temp=e;
+		while(e!=NULL and e->next!=NULL)
+		{
+			o->next=e->next;
+			o=o->next;
+			e->next=o->next;
+			e=e->next;
+		}
+		o->next=temp;
+		return head;
+	}
+	//merge h1,h2
+    auto merge(auto h1,auto h2)
+	{
+		if(h1==NULL or h2==NULL)
+		{
+			return (h1==NULL)?h2:h1;
+		}
+		if(h1->data<h2->data)
+		{
+			h1->next=merge(h1->next,h2);
+			return h1;
+		}
+		else
+		{
+			h2->next=merge(h1,h2->next);
+			return h2;
+		}
 
-
-
+	}
+    //merge sort on ll
+    //1   ->  3->   6   ->  2 -> 7
+    //      pre    slowp 
+    //1  ->  3 ->NULL     h1
+    //6  -> 2 -> 7-> NULL  h2
+    
+    auto mergesort(auto head)
+	{
+		if(head==NULL or head->next==NULL)
+			return head;
+		auto sp=head,fp=head,pre=sp;
+		while(fp and fp->next)
+		{
+			pre=sp;
+			sp=sp->next;
+			fp=fp->next->next;
+		}
+		pre->next=NULL;
+		auto h1=mergesort(head);
+		auto h2=mergesort(sp);
+		return merge(h1,h2);
+	}
 };
 int main() {
 	fast;
 	// your code goes here
-	linked_list *head=NULL;
+/*	linked_list *head=NULL;
 	head=head->add(1,head);
 	head=head->add(2,head);
 	head=head->add(3,head);
 	head=head->add(4,head);
 	head=head->add(5,head); 
+	*/
 	//head=head->add(6,head); 
 	//head->print(head);
 	//cout<<head->middle_element(head)<<endl;
@@ -261,7 +337,7 @@ int main() {
   /* head=head-> remove_duplicate_unsorted(head);
 	head->print(head);
 	*/
-	auto cur=head,temp=head;
+/*	auto cur=head,temp=head;
 	while(cur->next)
 	{
 		cur=cur->next;
@@ -272,6 +348,38 @@ int main() {
 	cout<<head->detect_loop(head);
 			head=head->remove_loop(head);
 	cout<<head->detect_loop(head);
-return 0;
+	*/
+/*	//intersection_point
+	linked_list *head1=NULL,*head2=NULL;
+	head1=head1->add(1,head1);
+	head1=head1->add(2,head1);
+	head1=head1->add(3,head1);
+	head1=head1->add(4,head1);
+	head1=head1->add(5,head1); 
+	head1=head1->add(6,head1); 
+ 	//ll 2 for intersection_point
+	head2=head2->add(8,head2);
+	head2=head2->add(6,head2);
+	
+    auto cur=head2, temp=head1;
+    while(cur)
+        cur=cur->next;
+    while(temp->data!=4)
+        temp=temp->next;
+    cur->next=temp;
+    cout<<head1->intersection_point(head1,head2)<<endl;
+    */
+   // head1=head1->odd_even(head1);
+    //head1->print(head1);
+    linked_list *head1=NULL,*head2=NULL;
+	head1=head1->add(6,head1);
+	head1=head1->add(2,head1);
+	head1=head1->add(5,head1);
+	head1=head1->add(4,head1);
+	head1=head1->add(5,head1); 
+	head1=head1->add(1,head1); 
+    
+     head1=head1->mergesort(head1);
+    head1->print(head1);
 }
 
