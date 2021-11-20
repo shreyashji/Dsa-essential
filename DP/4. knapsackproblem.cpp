@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-//top down approach knapsack problem
+//top down approach knapsack problem this is easy
 int knapsack(int wts[],int prices[], int N, int W){
 	//base case
 	if(N==0 OR W==0){
